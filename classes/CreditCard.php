@@ -66,4 +66,12 @@ class CreditCard {
       echo "<h4>Inserisci CVV corretto</h4>";
     }
   }
+
+  public function checkExpirationCreditCard(){
+    if($this->expiration >= date("YYYY")){
+      echo "<h4>Carta accettata</h4>";
+    } else{
+      echo "<h4>Carta scaduta</h4>";
+    }
+  }
 }
