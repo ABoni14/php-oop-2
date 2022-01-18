@@ -13,17 +13,22 @@ require_once __DIR__ . "/classes/Product.php";
 require_once __DIR__ . "/classes/CreditCard.php";
 require_once __DIR__ . "/classes/VipUser.php";
 
-$new_user = new User("Andrea","Boni");
+$new_user = new User("Andrea","Boni","andreboni@gmail.com");
+$new_user -> controlEmailUser();
 var_dump($new_user);
 
 $new_product = new Product("iPhone 13",1200,11);
+$new_product -> getFinalCost();
 var_dump($new_product);
 
-$new_creditcard = new CreditCard("123456789", "Andrea Boni","123","2023-08-28");
+$new_creditcard = new CreditCard(12345226789, "Andrea Boni",123,"2023-08-28");
+$new_creditcard -> checkNumberCreditCard();
+$new_creditcard -> checkCvvCreditCard();
 var_dump($new_creditcard);
 
-$new_vipuser = new VipUser("Gianni","Pascoli");
+$new_vipuser = new VipUser("Gianni","Pascoli","giannipas@gmailcom");
 $new_vipuser -> setDiscount(40);
+$new_vipuser -> controlEmailUser();
 var_dump($new_vipuser);
 ?>
 

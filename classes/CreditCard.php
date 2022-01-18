@@ -47,4 +47,23 @@ class CreditCard {
   public function getExpiration(){
     return $this->codecard;
   }
+
+  // METHODS
+  public function checkNumberCreditCard(){
+    if(strlen($this->codecard) < 10){
+      echo "<h4>Carta corretta</h4>";
+      return $this->codecard;
+    } else{
+      echo "<h4>Inserisci una carta corretta</h4>";
+    }
+  }
+
+  public function checkCvvCreditCard(){
+    if(strlen($this->cvv) === 3){
+      echo "<h4>CVV corretto</h4>";
+      return $this->cvv;
+    } else{
+      echo "<h4>Inserisci CVV corretto</h4>";
+    }
+  }
 }
