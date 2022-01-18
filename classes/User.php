@@ -8,6 +8,7 @@ class User {
   private $adress_user;
   private $number_user;
   private $discount = 0;
+  private $creditcard;
 
   public function __construct($_name_user,$_lastname_user,$_email_user)
   {
@@ -32,6 +33,10 @@ class User {
   public function setEmailUser($_email_user){
     $this->email_user = $_email_user;
   }
+
+  public function setCreditCard($_creditcard){
+    $this->creditcard = $_creditcard;
+  }
   // GETTING
   public function getNameUser(){
     return $this->name_user;
@@ -47,6 +52,10 @@ class User {
 
   public function getEmailUser(){
     return $this->email_user;
+  }
+
+  public function getCreditCard(){
+    return $this->creditcard;
   }
   // METHODS
   public function controlEmailUser(){

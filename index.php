@@ -13,10 +13,6 @@ require_once __DIR__ . "/classes/Product.php";
 require_once __DIR__ . "/classes/CreditCard.php";
 require_once __DIR__ . "/classes/VipUser.php";
 
-$new_user = new User("Andrea","Boni","andreboni@gmail.com");
-$new_user -> controlEmailUser();
-var_dump($new_user);
-
 $new_product = new Product("iPhone 13",1200,11);
 $new_product -> getFinalCost();
 var_dump($new_product);
@@ -30,6 +26,11 @@ $new_vipuser = new VipUser("Gianni","Pascoli","giannipas@gmailcom");
 $new_vipuser -> setDiscount(40);
 $new_vipuser -> controlEmailUser();
 var_dump($new_vipuser);
+
+$new_user = new User("Andrea","Boni","andreboni@gmail.com");
+$new_user -> controlEmailUser();
+$new_user -> setCreditCard($new_creditcard);
+var_dump($new_user);
 ?>
 
 <!DOCTYPE html>
