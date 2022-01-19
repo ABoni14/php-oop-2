@@ -1,13 +1,15 @@
 <?php
+require_once __DIR__ . "/Address.php"; 
 
 class User {
+  use Address;
 
   private $name_user;
   private $lastname_user;
   private $email_user;
   private $adress_user;
   private $number_user;
-  private $discount = 0;
+  protected $discount = 0;
   private $creditcard;
 
   public function __construct($_name_user,$_lastname_user,$_email_user)
@@ -34,9 +36,9 @@ class User {
     $this->email_user = $_email_user;
   }
 
-  public function setCreditCard($_creditcard){
-    $this->creditcard = $_creditcard;
-  }
+  // public function setCreditCard($_creditcard){
+  //   $this->creditcard = $_creditcard;
+  // }
   // GETTING
   public function getNameUser(){
     return $this->name_user;

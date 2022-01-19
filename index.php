@@ -12,17 +12,12 @@ require_once __DIR__ . "/classes/User.php";
 require_once __DIR__ . "/classes/Product.php";
 require_once __DIR__ . "/classes/CreditCard.php";
 require_once __DIR__ . "/classes/VipUser.php";
-require_once __DIR__ . "/classes/Sale.php";
+require_once __DIR__ . "/classes/Customer.php";
 
 $new_product = new Product("iPhone 13",1200,11);
-$new_product -> getFinalCost();
 var_dump($new_product);
 
-$new_creditcard = new CreditCard(12345226789, "Andrea Boni",123,"2023-08-28");
-$new_creditcard -> checkNumberCreditCard();
-$new_creditcard -> checkCvvCreditCard();
-$new_creditcard -> setExpiration(2024);
-$new_creditcard -> checkExpirationCreditCard();
+$new_creditcard = new CreditCard(12345226789, "Andrea Boni",123,2,2025);
 var_dump($new_creditcard);
 
 $new_vipuser = new VipUser("Gianni","Pascoli","giannipas@gmailcom");
@@ -32,11 +27,15 @@ var_dump($new_vipuser);
 
 $new_user = new User("Andrea","Boni","andreboni@gmail.com");
 $new_user -> controlEmailUser();
-$new_user -> setCreditCard($new_creditcard);
 var_dump($new_user);
 
-$new_sale = new Sale($new_user, $new_product);
-var_dump($new_sale);
+$cliente = new Customer("Giuseppe", "Verdi","giubeppe@gmail.com");
+$cliente->setCreditCard(987987987987,'Giuseppe Verdi',5,2023,987);
+$cliente->route = "Via Giuseppe Garibaldi";
+$cliente->town = "Affi";
+$cliente->zip = 37010;
+$cliente->Country = 'Italia';
+var_dump($cliente);
 ?>
 
 <!DOCTYPE html>

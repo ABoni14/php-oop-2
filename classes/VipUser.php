@@ -5,6 +5,7 @@ class VipUser extends User {
   function __construct($_name_user,$_lastname_user,$_email_user)
   {
     parent::__construct($_name_user,$_lastname_user,$_email_user);
+    $this->discount = 40;
   }
 
   // SETTING

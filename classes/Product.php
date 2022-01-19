@@ -39,10 +39,4 @@ class Product {
   public function getQuantityProduct(){
     return $this->quantity_product;
   }
-
-  // METHODS
-  public function getFinalCost(){
-    $finalPrice = $this->cost - (($this->cost * $this->discount) / 100);
-    return number_format($finalPrice, 2, ",", "");
-  }
 }

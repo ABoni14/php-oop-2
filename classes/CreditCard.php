@@ -4,14 +4,17 @@ class CreditCard {
   private $codecard;
   private $accountholder;
   private $cvv;
-  private $expiration;
+  private $expiration_m;
+  private $z;
 
-  public function __construct($_codecard,$_accountholder,$_cvv,$_expiration)
+  public function __construct($_codecard,$_accountholder,$_cvv,$_expiration_m,$_expiration_y)
   {
-    $this->codecard = $_codecard;
+    $this->codecard = $this->checkNumberCreditCard($_codecard);
     $this->accountholder = $_accountholder;
-    $this->cvv = $_cvv;
-    $this->expiration = $_expiration;
+    $this->cvv = $this->checkCvvCreditCard($_cvv);
+    $this->checkExpirationCreditCard($_expiration_y, $_expiration_m);
+    $this->expiration_m = $_expiration_m;
+    $this->expiration_y = $_expiration_y;
   }
 
   // SETTING
@@ -27,8 +30,12 @@ class CreditCard {
     $this->cvv = $_cvv;
   }
 
-  public function setExpiration($_expiration){
-    $this->expiration = $_expiration;
+  public function setExpiration_m($_expiration_m){
+    $this->expiration_m = $_expiration_m;
+  }
+
+  public function setExpiration_y($_expiration_y){
+    $this->expiration_y = $_expiration_y;
   }
 
   // GETTING
@@ -37,41 +44,67 @@ class CreditCard {
   }
 
   public function getAccountholder(){
-    return $this->codecard;
+    return $this->accountholder;
   }
 
   public function getCvv(){
-    return $this->codecard;
+    return $this->cvv;
   }
 
-  public function getExpiration(){
-    return $this->codecard;
+  public function getExpiration_m(){
+    return $this->expiration_m;
+  }
+
+  public function getExpiration_y(){
+    return $this->expiration_y;
   }
 
   // METHODS
-  public function checkNumberCreditCard(){
-    if(strlen($this->codecard) < 10){
+  public function checkNumberCreditCard($codecard){
+    if(strlen($codecard) < 10){
       echo "<h4>Carta corretta</h4>";
-      return $this->codecard;
+      return $codecard;
     } else{
       echo "<h4>Inserisci una carta corretta</h4>";
     }
   }
 
-  public function checkCvvCreditCard(){
-    if(strlen($this->cvv) === 3){
+  public function checkCvvCreditCard($cvv){
+    if(strlen($cvv) === 3){
       echo "<h4>CVV corretto</h4>";
-      return $this->cvv;
+      return $cvv;
     } else{
       echo "<h4>Inserisci CVV corretto</h4>";
     }
   }
 
-  public function checkExpirationCreditCard(){
-    if($this->expiration >= date("YYYY")){
-      echo "<h4>Carta accettata</h4>";
-    } else{
-      echo "<h4>Carta scaduta</h4>";
+  private function checkExpirationCreditCard($y,$m){
+    $today = date("Y-n-j");
+    if(!is_int($y) || !is_int($m)){
+      throw new Exception("Inserisci una data corretta");
     }
+    if($m > 12 || $m < 1){
+      throw new Exception("Mese non valido");
+    }
+    $expired_date = $this->generateExpiredDate($y, $m);
+    if($today >= $expired_date){
+      throw new Exception('Carta di credito scaduta');
+    }
+  }
+
+  private function generateExpiredDate($y, $m){
+    $m_exp = $m + 1;
+    $y_exp = $y;
+
+    if($m_exp > 12){
+      $m_exp = 1;
+      $y_exp = $y + 1;
+    }
+
+    if(!checkdate($m_exp,1,$y_exp)){
+      throw new Exception('La data non è valida');
+    }
+
+    return date("$y_exp-$m_exp-1");
   }
 }
